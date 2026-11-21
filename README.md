@@ -526,7 +526,7 @@ first $e$ hands are home. Every higher-power hand points to a nonzero residue. T
 
 $$
 \underbrace{v_p(n)}_{\text{exponent on the multiplicative side}}
-=\underbrace{\#\{j\ge 1:p^j\mid n\}}_{\text{additive hands at home in the }p\text{ family}}.
+=\underbrace{\left\lvert\left\lbrace j\ge 1 : p^j\mid n \right\rbrace\right\rvert}_{\text{additive hands at home in the }p\text{ family}}.
 $$
 
 This gives a test for a shared address. Choose an additive address $n$ and a multiplicative address $m$ independently.
