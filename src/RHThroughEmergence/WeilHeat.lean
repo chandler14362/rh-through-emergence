@@ -1,4 +1,6 @@
-import RHThroughEmergence.Minkowski
+import RHThroughEmergence.PrimeBursts
+import Mathlib.Analysis.SpecialFunctions.Gaussian.FourierTransform
+import Mathlib.Data.Nat.Factorization.PrimePow
 
 /-! The Gaussian Fourier test and the absolutely convergent prime term in Weil's formula. -/
 
@@ -186,7 +188,7 @@ theorem prime_heat_integral {τ c : ℝ} (hτ : 0 < τ) (hc : 1 < c) :
     exact (ArithmeticFunction.LSeriesSummable_vonMangoldt (s := (c : ℂ)) hc).norm.mul_left _
   have hseries (r : ℝ) : verticalWeight τ c r * (-deriv riemannZeta (c + r*I) / riemannZeta (c + r*I)) =
       ∑' n : ℕ, F n r := by
-    rw [← GaussianLattice.bosons_force (by simpa using hc : 1 < ((c : ℂ) + r*I).re)]
+    rw [← ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div (by simpa using hc : 1 < ((c : ℂ) + r*I).re)]
     simp only [F, LSeries, tsum_mul_left]
   simp_rw [hseries]
   rw [← integral_tsum_of_summable_integral_norm hint hsum, div_eq_mul_inv, ← tsum_mul_right]

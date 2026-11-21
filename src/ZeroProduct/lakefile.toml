@@ -1,6 +1,6 @@
 name = "emergence-zero-product"
 version = "0.1.0"
-defaultTargets = ["ZeroReconstruction"]
+defaultTargets = ["ZeroReconstruction", "PairedZeros", "GaussianWeil"]
 allowNonModules = true
 
 [[require]]
@@ -11,10 +11,22 @@ rev = "a4fb6989b07e9c76b511807ae93e33e25b820e9b"
 [[lean_lib]]
 name = "RHThroughEmergence"
 srcDir = ".."
-roots = ["RHThroughEmergence.MellinReconstruction", "RHThroughEmergence.Reconstruction"]
+roots = ["RHThroughEmergence.PrimeBursts", "RHThroughEmergence.WeilHeat", "RHThroughEmergence.MellinReconstruction", "RHThroughEmergence.Reconstruction"]
 
 [[lean_lib]]
 name = "EmergenceMathlib"
 
 [[lean_lib]]
 name = "ZeroReconstruction"
+
+[[lean_lib]]
+name = "PairedZeros"
+
+[[lean_lib]]
+name = "GaussianContour"
+
+[[lean_lib]]
+name = "GaussianTrace"
+
+[[lean_lib]]
+name = "GaussianWeil"

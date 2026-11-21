@@ -150,7 +150,7 @@ $$
 | --- | --- |
 | Sampled vacuum background | For $\theta(a)=\sum_{m\in\mathbb Z}e^{-\pi m^2a}$, the fold reads $a^{1/4}\theta(a)=a^{-1/4}\theta(1/a)$. The $m=0$ term on each side has weight $a^{1/4}$ or $a^{-1/4}$. [\[T\]](src/RHThroughEmergence/GaussianLattice.lean#L18 "gaussian_lattice_fold") |
 | Supersymmetric modes | The generator of changes of scale gives the constant function and $x^{-1}$ the respective eigenvalues $+1/2$ and $-1/2$. [\[T\]](src/RHThroughEmergence/VacuumOscillator.lean#L49 "reflected_scale_modes") Evolving them through depth $u$ gives the two terms of $B(u)$. |
-| Minkowski spacetime | Take $L_\pm=e^{\pm u/2}$, $T=(L_++L_-)/2$ and $X=(L_+-L_-)/2$. The interval is $T^2-X^2=L_+L_-$. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L18 "interval_eq") Here it equals one, $B(u)=2T$, and initial contact corresponds to the rest point $(T,X)=(1,0)$. |
+| Minkowski spacetime | Take $L_\pm=e^{\pm u/2}$, $T=(L_++L_-)/2$ and $X=(L_+-L_-)/2$. The interval is $T^2-X^2=L_+L_-$. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L19 "interval_eq") Here it equals one, $B(u)=2T$, and initial contact corresponds to the rest point $(T,X)=(1,0)$. |
 | Convex geometry | Add the unit square to an axis-aligned rectangle of sides $L_+,L_-$ by taking all pairwise sums of points. The resulting rectangle has area $(1+L_+)(1+L_-)=2+B(u)$. Subtract the two original unit areas to recover $B(u)$, twice their mixed area. |
 
 For a pair whose contact is at global depth $v$, use the same weights at local depth $u-v$. Their sum is
@@ -166,17 +166,17 @@ The vacuum background has a real component and a component at every prime. The r
 each prime $p$, the local vacuum is the indicator of the $p$-adic integers $\mathbb Z_p$. Tate’s formula combines them
 into one state. For $s=\sigma+it$ with $\sigma>1$,
 
-$$
+```math
 \begin{aligned}
 \Phi_0(x)
  &=\underbrace{g(x_\infty)}_{\text{real Gaussian}}\,
-   \underbrace{\prod_p\mathbf1_{\mathbb Z_p}(x_p)}_{\text{finite-place vacua}},\\[6pt]
+   \underbrace{\prod_p\mathbf1_{\mathbb Z_p}(x_p)}_{\text{finite-place vacua}},\\
 Z(s)
  &=\int_{\mathbb A^\times}\Phi_0(x)|x|_{\mathbb A}^{s}\,d^\times x\\
  &=\underbrace{\pi^{-s/2}\Gamma(s/2)}_{\text{real Mellin factor }\,\Gamma_{\mathbb R}(s)}
    \;\underbrace{\zeta(s)}_{\text{Euler product}}.
 \end{aligned}
-$$
+```
 
 Here $x$ has one real coordinate and one coordinate at every prime. The integral runs over the nonzero local coordinates
 that are units at almost all primes, with each finite unit group given volume one and real measure $dx/|x|$. Put
@@ -256,8 +256,9 @@ $g(\sqrt a)=e^{-\pi a}$ from the zero integrals alone. As $a\downarrow0$, the re
 [\[T\]](src/ZeroProduct/ZeroReconstruction.lean#L99 "gaussian_from_zeros")
 [\[T\]](src/ZeroProduct/ZeroReconstruction.lean#L181 "gaussian_from_zeros_at_origin")
 
-**[prior]** The classical paired form displays the reflection directly. Each zero $\rho$ in the upper half-plane pairs
+The classical paired form displays the reflection directly. Each zero $\rho$ in the upper half-plane pairs
 with $1-\rho$ in the lower half-plane, counting multiplicity.
+[\[T\]](src/ZeroProduct/PairedZeros.lean#L146 "xi_paired_product")
 
 $$
 \xi(s)=\underbrace{\tfrac12}_{\xi(0)}
@@ -266,27 +267,29 @@ $$
              _{\text{one zero pair }(\rho,1-\rho)}.
 $$
 
-**[prior]** One can also compare the prime and zero readings at a single scale. Use a Gaussian of heat time $\tau>0$,
+One can also compare the prime and zero readings at a single scale. Use a Gaussian of heat time $\tau>0$,
 with density in depth $k_\tau(u)=e^{-u^2/(4\tau)}/\sqrt{4\pi\tau}$. Write $\gamma_\rho=(\rho-\tfrac12)/i$, allowing
 complex values. Summing over **all** nontrivial zeros with multiplicity, Weil’s formula gives
 
-$$
+```math
 \begin{aligned}
 &\underbrace{\sum_\rho e^{-\tau\gamma_\rho^2}}_{\text{zeros}}
- =\underbrace{2e^{\tau/4}}_{\text{two pole contributions}}\\[4pt]
+ =\underbrace{2e^{\tau/4}}_{\text{two pole contributions}}\\
 &\quad+\underbrace{\frac{1}{2\pi}\int_{\mathbb R}e^{-\tau r^2}
- \left[\Re\frac{\Gamma'}{\Gamma}\!\left(\tfrac14+\tfrac{ir}{2}\right)-\log\pi\right]dr}_{\text{floor}}\\[4pt]
+ \left[\Re\frac{\Gamma'}{\Gamma}\!\left(\tfrac14+\tfrac{ir}{2}\right)-\log\pi\right]dr}_{\text{floor}}\\
 &\quad-\underbrace{2\sum_p\sum_{j\ge1}\frac{\log p}{p^{j/2}}\,k_\tau(j\log p)}_{\text{primes}}.
 \end{aligned}
-$$
+```
+
+[\[T\]](src/ZeroProduct/GaussianWeil.lean#L156 "gaussian_weil")
 
 The **two pole contributions** come from the poles at $s=0$ and $s=1$, one for each reflected origin weight. The
 **floor** comes from the real Gaussian’s gamma factor. The **primes** term samples the heat kernel at each tick of each
 prime clock. The Gaussian Fourier integral gives exactly $k_\tau(u)$ with the displayed normalization. The prime series
 converges absolutely for every $\tau>0$, and reindexing its nonzero terms by $(p,j)$ gives the double sum above.
-[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L14 "gaussian_test_transform") ·
-[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L36 "prime_heat_summable") ·
-[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L75 "prime_heat_reindex")
+[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L16 "gaussian_test_transform") ·
+[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L38 "prime_heat_summable") ·
+[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L77 "prime_heat_reindex")
 
 On a vertical line $s=c+ir$ with $c>1$, the Gaussian test can be integrated term by term against the prime logarithmic
 derivative. For every $\tau>0$ this gives
@@ -298,11 +301,13 @@ $$
 $$
 
 The shift of each Gaussian mode and absolute convergence justify this identity.
-[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L96 "shifted_gaussian_test") ·
-[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L162 "prime_heat_integral")
+[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L98 "shifted_gaussian_test") ·
+[\[T\]](src/RHThroughEmergence/WeilHeat.lean#L164 "prime_heat_integral")
 
-The full heat-trace equality above is the classical Gaussian Weil formula. Passing from the checked right-hand contour
-to the zero sum and gamma integral still requires a formal contour argument that counts zeros with multiplicity.
+To obtain the zero side, integrate the contribution of each zero and sum with its analytic multiplicity. Shifting the
+gamma term to $\Re s=1/2$ gives the real integral in the formula.
+[\[T\]](src/ZeroProduct/GaussianTrace.lean#L136 "gaussian_zero_trace") ·
+[\[T\]](src/ZeroProduct/GaussianContour.lean#L160 "gamma_shift")
 
 ### The supersymmetric representation
 
@@ -402,15 +407,15 @@ A positive integer also has a unique decomposition $n=mk^2$ with $m$ squarefree.
 part of its exponent into $k^2$ and the remainder into $m$. In the paper’s supersymmetric reading, $m$ carries the
 fermionic part and $k^2$ the paired part. Summing the possible exponents of each prime gives, for $\Re s>1$,
 
-$$
+```math
 \begin{aligned}
 \zeta(s)&=\sum_{n\ge1}n^{-s}=\prod_p(1-p^{-s})^{-1}\\
  &=\underbrace{\zeta(2s)}_{\text{squares }k^2}\;
-   \underbrace{\prod_p(1+p^{-s})}_{\text{squarefree part }m},\\[5pt]
+   \underbrace{\prod_p(1+p^{-s})}_{\text{squarefree part }m},\\
 \sum_{m\ {\rm squarefree}}m^{-s}
  &=\prod_p(1+p^{-s})=\frac{\zeta(s)}{\zeta(2s)}.
 \end{aligned}
-$$
+```
 
 ### From the lattice fold to the explicit formula
 
@@ -446,14 +451,14 @@ at the unit scale $a=1$. The theta identity gives $\psi(a)=a^{-1/2}\psi(1/a)+(a^
 integral, the first term changes $s$ to $1-s$ after the substitution $a\mapsto1/a$. The last two terms integrate to
 $1/(s-1)-1/s$. Hence
 
-$$
+```math
 \begin{aligned}
 Z(s)&=\underbrace{-\frac1s}_{\text{empty site}}
-      +\underbrace{\frac1{s-1}}_{\text{reflected empty site}}\\[4pt]
+      +\underbrace{\frac1{s-1}}_{\text{reflected empty site}}\\
  &\quad+\underbrace{\int_1^\infty\psi(a)
        \big(a^{s/2}+a^{(1-s)/2}\big)\frac{da}{a}}_{\text{fold-symmetric remainder}}.
 \end{aligned}
-$$
+```
 
 The two pole terms are the Mellin contributions of the origin and its reflected image.
 [\[T\]](src/RHThroughEmergence/GaussianLattice.lean#L37 "completed_zeta_pole_decomposition") The
@@ -614,16 +619,16 @@ $$
 $$
 
 Every prime advances along this ray.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L30 "prime_null_step") Dividing both new coordinates by
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L31 "prime_null_step") Dividing both new coordinates by
 $\sqrt p$ gives $(\sqrt p\,L_+,L_-/\sqrt p)$, the interval-preserving boost of rapidity $\tfrac12\log p$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L54 "normalized_dilation") On the orbit from rest,
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L55 "normalized_dilation") On the orbit from rest,
 $T=\cosh(\tfrac12\log n)$ increases strictly from $n$ to $np$ for every $n\ge1$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L79 "prime_advances_time") Multiplying primes adds their
-rapidities in any order. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L69 "rapidity_mul")
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L80 "prime_advances_time") Multiplying primes adds their
+rapidities in any order. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L70 "rapidity_mul")
 
 In a scan of successive addresses, the same prime clock produces a burst at each positive power $n=p^j$. At depth
 $v=\log n$ its amplitude is $b_n=\Lambda(n)/\sqrt n$. For $n=p^j$ this is $(\log p)/p^{j/2}$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L93 "burst_prime_power") In the two reflected scale modes
+[\[T\]](src/RHThroughEmergence/PrimeBursts.lean#L10 "burst_prime_power") In the two reflected scale modes
 the continuous response is
 
 $$
@@ -636,11 +641,11 @@ K_n(u)=
 $$
 
 Its left slope at $v$ is zero. Its right slope is $b_n$ because $\cosh(0)=1$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L125 "response_slopes") At $n=8$ the clock for $2$ ticks
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L96 "response_slopes") At $n=8$ the clock for $2$ ticks
 for the third time, at depth $3\log 2$, with slope jump $\log 2/\sqrt8$. At $n=6$ both prime factors contribute to the
 total rapidity, but neither clock starts a new pulse there. The precise link is
 $\tfrac12\sum_{d\mid n}\sqrt d\,b_d=\tfrac12\log n$. Each $p^j$ dividing $n$ contributes one $\log p$ to the sum.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L145 "divisor_bursts") This is what I mean by primes as
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L116 "divisor_bursts") This is what I mean by primes as
 bursts of time in the vacuum background. A prime supplies the elementary forward boost, and its powers record the
 successive ticks of that clock.
 
@@ -657,19 +662,19 @@ $$
 $$
 
 This pair is the boost of the vacuum rest point $(L_+,L_-)=(1,1)$ by rapidity $\eta$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L160 "reflectedPair_eq_boost")
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L131 "reflectedPair_eq_boost")
 
 In time and space coordinates, $T=(L_++L_-)/2=\cosh\eta$ and $X=(L_+-L_-)/2=\sinh\eta$. Every pair satisfies
 $T^2-X^2=1$, for every $\beta$.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L172 "reflectedPair_unit_interval")
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L143 "reflectedPair_unit_interval")
 
 At the starting scale $x=1$, every pair sits at $(T,X)=(1,0)$ because $\log 1=0$. The first doubling distinguishes them.
 At $x=2$, the spatial coordinate vanishes exactly when $\beta=1/2$, since $\log 2>0$ and $\sinh\eta=0$ exactly at
-$\eta=0$. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L178 "rest_at_two_iff")
+$\eta=0$. [\[T\]](src/RHThroughEmergence/Minkowski.lean#L149 "rest_at_two_iff")
 
 **RH is equivalent to every nontrivial zeta zero having $X=0$ at the first doubling.** Here “at rest” means that the two
 normalized mode magnitudes agree in the vacuum frame. Proving that every nontrivial zero has this property remains open.
-[\[T\]](src/RHThroughEmergence/Minkowski.lean#L193 "riemannHypothesis_iff_rest_at_two")
+[\[T\]](src/RHThroughEmergence/Minkowski.lean#L164 "riemannHypothesis_iff_rest_at_two")
 
 ## Build the Lean project
 
@@ -685,8 +690,8 @@ pair, and its initial particle pair collision. It gives the two reflected weight
 proves the bijection from finite binary paths to positive integers. `VacuumOscillator` contains the oscillator,
 normalized Gaussian uniqueness and the scale generator. `GaussianLattice` contains the Fourier and lattice identities.
 `TorusClocks` proves address agreement, the intersection of the two radius graphs and the prime phase rotations.
-`Minkowski` contains the boosts, prime bursts and first-doubling RH equivalence. `VacuumIntegrals` evaluates the
-finite-place Fourier transform and the global sum in valuation-shell coordinates. `WeilHeat` treats the Gaussian Fourier
+`Minkowski` contains the boosts and first-doubling RH equivalence. `PrimeBursts` gives the prime-power burst weights.
+`VacuumIntegrals` evaluates the finite-place Fourier transform and the global sum in valuation-shell coordinates. `WeilHeat` treats the Gaussian Fourier
 test and its prime series. `Reconstruction` proves the prime enumeration and Möbius inversion. `MellinReconstruction`
 supplies the transform and inversion shared with the zero-product proof.
 
@@ -699,7 +704,8 @@ lake build
 
 This target uses Lean 4.35.0 and the same Mellin and arithmetic source files as the 4.24.0 companion. The lockfile pins
 the Hadamard theorem used in `xi_from_zeros`. The entry point `import ZeroReconstruction` exposes
-`RHThroughEmergence.ZeroReconstruction.primes_equal_zeros` and `gaussian_from_zeros`.
+`RHThroughEmergence.ZeroReconstruction.primes_equal_zeros` and `gaussian_from_zeros`. Import `PairedZeros` for the paired
+product or `GaussianWeil` for the full heat formula.
 [Hadamard factorization at the pinned revision](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/a4fb6989b07e9c76b511807ae93e33e25b820e9b/PrimeNumberTheoremAnd/Mathlib/NumberTheory/LSeries/RiemannZetaHadamard.lean#L342)
 
 ## Apply and check the patch
@@ -724,7 +730,8 @@ The patch contains the extracted theorem `RHThroughEmergence.GaussianLattice.gau
 **Verification.** The Lean 4.24.0 companion builds with the binary path bijection, normalized Gaussian uniqueness,
 oscillator identities, complex clock phases, finite-place Fourier identity, valuation-shell sum and Gaussian heat tests.
 The axiom checks for the new 4.24.0 results and the earlier checks of 14 reconstruction lemmas and theorems on Lean
-4.35.0 reported only `propext`, `Classical.choice` and `Quot.sound`. The patch applied to a clean copy of the supplied
+4.35.0 reported only `propext`, `Classical.choice` and `Quot.sound`. The paired product and the full Gaussian Weil formula
+on 4.35.0 passed the same axiom check. The patch applied to a clean copy of the supplied
 source and reversed byte-for-byte. On 4.24.0 the patched Gaussian module built after mapping three Fourier theorem names
 to their 4.24 spellings. A build on Levent’s pinned 4.33.1 and verification of the full supplied RH argument remain
 outstanding.
