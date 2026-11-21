@@ -1,3 +1,5 @@
+# DISCLAIMER: WIP WORK. NOT COMPLETE. I JUST BELIEVE IN THE IDEA AND AM ACTIVELY WORKING ON IT. STILL NEEDS MORE WORK
+
 # RH through emergence — from the empty vacuum to the number line
 
 ## My background
