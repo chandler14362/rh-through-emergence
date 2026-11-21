@@ -10,7 +10,7 @@ line emerging could lead to a proof of RH. Thank you, [@\_\_alpoge\_\_](https://
 Lean. Quickly looking at the released Lean, I noticed a dual lattice folder, which made me think of my two tori. I
 thought of how I could connect my work to the released proof, and it seemed to work. My patch supplies the Gaussian
 Fourier identity at the point where Levent's calculation uses it. I don't have the knowledge to fully verify the
-entirity of my work. My knowledge of math and physics is very scattered. This work was developed from a
+entirety of my work. My knowledge of math and physics is very scattered. This work was developed from a
 reverse-engineering perspective of the universe through my intuition. I am asking the math and science community if they
 would be willing to take a look at it and let me know what they think.
 
