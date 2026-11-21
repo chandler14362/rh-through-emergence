@@ -1,0 +1,41 @@
+diff --git a/src/GroundTheory/GlobalFields/TateThesis/Gaussian.lean b/src/GroundTheory/GlobalFields/TateThesis/Gaussian.lean
+--- a/src/GroundTheory/GlobalFields/TateThesis/Gaussian.lean
++++ b/src/GroundTheory/GlobalFields/TateThesis/Gaussian.lean
+@@ -1,4 +1,5 @@
+ import Mathlib
++import GroundTheory.GlobalFields.TateThesis.EmergenceGaussian
+ 
+ namespace GroundTheory.Global
+ 
+@@ -27,11 +28,8 @@
+     realGaussian x = ((Real.exp (-(π * x ^ 2)) : ℝ) : ℂ) := by
+   simp [realGaussian, ofReal_exp]
+ 
+-theorem fourier_realGaussian : 𝓕 realGaussian = realGaussian := by
+-  have h := fourier_gaussian_pi (b := 1) (by simp)
+-  simp only [mul_one, one_cpow, div_one, one_mul] at h
+-  unfold realGaussian
+-  rw [h]
++theorem fourier_realGaussian : 𝓕 realGaussian = realGaussian :=
++  RHThroughEmergence.GaussianLattice.gaussian_self_dual
+ 
+ theorem integrable_realGaussian : Integrable realGaussian := by
+   exact integrable_cexp_neg_mul_sq (b := (π : ℂ)) (by simpa using Real.pi_pos)
+diff --git a/src/GroundTheory/GlobalFields/TateThesis/EmergenceGaussian.lean b/src/GroundTheory/GlobalFields/TateThesis/EmergenceGaussian.lean
+new file mode 100644
+--- /dev/null
++++ b/src/GroundTheory/GlobalFields/TateThesis/EmergenceGaussian.lean
+@@ -0,0 +1,13 @@
++import Mathlib
++
++namespace RHThroughEmergence.GaussianLattice
++
++open Complex FourierTransform
++
++/-- Fourier transformation fixes the Gaussian ground state. -/
++theorem gaussian_self_dual :
++    (𝓕 fun x : ℝ => cexp (-(Real.pi : ℂ) * (x : ℂ) ^ 2)) = fun t : ℝ => cexp (-(Real.pi : ℂ) * (t : ℂ) ^ 2) := by
++  have h := fourier_gaussian_pi (b := 1) (by simp)
++  simpa using h
++
++end RHThroughEmergence.GaussianLattice

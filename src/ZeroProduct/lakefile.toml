@@ -1,0 +1,20 @@
+name = "emergence-zero-product"
+version = "0.1.0"
+defaultTargets = ["ZeroReconstruction"]
+allowNonModules = true
+
+[[require]]
+name = "PrimeNumberTheoremAnd"
+git = "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd.git"
+rev = "a4fb6989b07e9c76b511807ae93e33e25b820e9b"
+
+[[lean_lib]]
+name = "RHThroughEmergence"
+srcDir = ".."
+roots = ["RHThroughEmergence.MellinReconstruction", "RHThroughEmergence.Reconstruction"]
+
+[[lean_lib]]
+name = "EmergenceMathlib"
+
+[[lean_lib]]
+name = "ZeroReconstruction"
